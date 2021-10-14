@@ -4,16 +4,15 @@ import java.util.List;
 
 public class ArraySerializer {
     public static void main(String[] args) {
-        int[] serializedArray = new int[200];
-        for (int i = 0; i < serializedArray.length; i++) {
-            serializedArray[i] = (int) (1 + (Math.random() * 999));
+        int[] originalArray = new int[200];
+        for (int i = 0; i < originalArray.length; i++) {
+            originalArray[i] = (int) (1 + (Math.random() * 999));
         }
-
-        System.out.println(pushArray(serializedArray));
-        System.out.println(Arrays.toString(pullArray(pushArray(serializedArray))));
+        String string = serialize(originalArray);
+        System.out.println(string);
+        System.out.println(Arrays.toString(deserialize(string)));
     }
-
-    public static String pushArray(int[] array) {
+    public static String serialize(int[] array) {
         String s = "";
         for (int i = 0; i < array.length; i++) {
             if (i == array.length - 1) {
@@ -24,8 +23,7 @@ public class ArraySerializer {
         }
         return s;
     }
-
-    public static int[] pullArray(String s)  {
+    public static int[] deserialize(String s)  {
         String[] string = s.split(",");
         List<Integer> list = new ArrayList<>();
         for (String i : string) {
